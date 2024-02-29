@@ -35,6 +35,8 @@ class Ui_Form(object):
         self.lineEdit_2.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.lineEdit_2.setStyleSheet("QLineEdit{\n"
 "    border-radius: 7px;\n"
+"    background-color: #2A2F41;\n"
+"    color: #FFFFFF;\n"
 "}")
         self.lineEdit_2.setText("")
         self.lineEdit_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -50,6 +52,8 @@ class Ui_Form(object):
         self.lineEdit_3.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.lineEdit_3.setStyleSheet("QLineEdit{\n"
 "    border-radius: 7px;\n"
+"    background-color: #2A2F41;\n"
+"    color: #FFFFFF;\n"
 "}")
         self.lineEdit_3.setText("")
         self.lineEdit_3.setAlignment(QtCore.Qt.AlignCenter)
@@ -109,6 +113,8 @@ class Ui_Form(object):
         self.lineEdit_4.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.lineEdit_4.setStyleSheet("QLineEdit{\n"
 "    border-radius: 7px;\n"
+"    background-color: #2A2F41;\n"
+"    color: #FFFFFF;\n"
 "}")
         self.lineEdit_4.setText("")
         self.lineEdit_4.setAlignment(QtCore.Qt.AlignCenter)
@@ -253,6 +259,8 @@ class Ui_Form(object):
         self.lineEdit_5.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.lineEdit_5.setStyleSheet("QLineEdit{\n"
 "    border-radius: 7px;\n"
+"    background-color: #2A2F41;\n"
+"    color: #FFFFFF;\n"
 "}")
         self.lineEdit_5.setText("")
         self.lineEdit_5.setAlignment(QtCore.Qt.AlignCenter)

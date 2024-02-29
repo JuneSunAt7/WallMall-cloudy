@@ -8,8 +8,6 @@ from loguru import logger
 from cryptography.fernet import Fernet
 
 
-# Настраиваем глобальный логгер для вывода в stdout
-# ============================================================================================================
 logger.remove()
 logger.add(
     sink=sys.stdout,
@@ -27,9 +25,7 @@ logger.add(
     compression="zip",
     enqueue=True # Делаем логгер потокобезопасным
 )
-# ============================================================================================================
-
-
+# class for search
 class Server:
     def __init__(self, ip, port):
         self.ip = ip
@@ -113,4 +109,4 @@ class Server:
 
 
 if __name__ == "__main__":
-    myserver = Server('127.0.0.1', 5555)
+    myserver = Server('127.0.0.1', 2121)

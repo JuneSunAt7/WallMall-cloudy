@@ -5,6 +5,7 @@ import json
 import socket
 from loguru import logger
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 from des import *
 
 from methods.SettingsPanel import *
@@ -51,11 +52,6 @@ class Client(QtWidgets.QMainWindow):
         self.connect_monitor = message_monitor()
         self.connect_monitor.mysignal.connect(self.signal_handler)
 
-        # Отключаем стандартные границы окна программы
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.center()
-
         # Блокируем кнопку "Выйти из чата"
         self.btn_locker(self.ui.pushButton_19, True)
 
@@ -63,9 +59,7 @@ class Client(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.send_message)
         self.ui.lineEdit.returnPressed.connect(self.send_message)
         self.ui.pushButton_2.clicked.connect(self.connect_to_server)
-        self.ui.pushButton_3.clicked.connect(lambda: self.close())
         self.ui.pushButton_4.clicked.connect(lambda: self.ui.listWidget.clear())
-        self.ui.pushButton_5.clicked.connect(lambda: self.showMinimized())
         self.ui.pushButton_7.clicked.connect(self.setting_panel)
         self.ui.pushButton_19.clicked.connect(self.server_disconnect)
 
@@ -227,7 +221,9 @@ class Client(QtWidgets.QMainWindow):
             item.setIcon(icon)
             self.ui.listWidget.setIconSize(size)
             self.ui.listWidget.addItem(item)
+            item.setBackground(QtGui.QColor(0, 255, 0))
             item.setText(f"{value[1]}:\n{value[-1]}")
+
             logger.info(value)
 
         elif value[0] == "CONNECTION_ERROR":
@@ -268,6 +264,7 @@ class Client(QtWidgets.QMainWindow):
                 item = QtWidgets.QListWidgetItem()
                 item.setTextAlignment(QtCore.Qt.AlignLeft)
                 size = QtCore.QSize(45, 45)
+
 
                 # Прикрепляем к нему нашу аватарку
                 if self.smile_type:
