@@ -75,7 +75,7 @@ class SettingPanel(QtWidgets.QWidget):
         image_path = QtWidgets.QFileDialog.getOpenFileName(filter="*.png\n*.jpg")
 
         if image_path[0]: # Если пользователь выбрал изображение
-            if os.path.getsize(image_path[0]) < 5120:
+            if os.path.getsize(image_path[0]) < 8192:
                 # В зависимости от формата изображения задаем имя
                 image_format = "png" if "png" in image_path[1] else "jpg"
                 shutil.copy(image_path[0], os.path.join("data", f"custom.{image_format}"))

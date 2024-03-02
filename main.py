@@ -1,10 +1,5 @@
-import os
-import sys
-import time
-import json
+
 import socket
-from loguru import logger
-from PyQt5 import QtCore, QtGui, QtWidgets
 
 from des import *
 
@@ -359,4 +354,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     myapp = Client()
     myapp.show()
-    sys.exit(app.exec_())
+    app.exec_()

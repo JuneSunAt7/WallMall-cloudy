@@ -54,8 +54,7 @@ class Server:
                 payload = ['SERVER_OK', "Успешное подключение к чату!", self.symmetric_key]
                 client.send(pickle.dumps(payload))
                 logger.info(f'{address} - Успешное подключение к чату!')
-                threading.Thread(target=self.message_handler, args=(client,)).start()
-            time.sleep(2)
+
 
 
     # Отправляем сообщение всем клиентам кроме текущего
@@ -109,4 +108,4 @@ class Server:
 
 
 if __name__ == "__main__":
-    myserver = Server('127.0.0.1', 2121)
+    myserver = Server('0.0.0.0', 2121)
