@@ -3,16 +3,18 @@ import re
 import json
 import shutil
 from PyQt5 import QtCore, QtGui, QtWidgets
-from methods.windows.settings import *
+
+from methods.face_detect import FaceRecognitionApp
+from methods.windows.settings import Ui_Form
 
 
 # Окно с настройками клиента
 class SettingPanel(QtWidgets.QWidget):
     def __init__(self, parent=None, signal=None):
-        super().__init__(parent, QtCore.Qt.Window)
+        super().__init__(parent)
         self.setting = Ui_Form()
         self.setting.setupUi(self)
-        self.setWindowModality(2)
+        self.setWindowModality(QtCore.Qt.WindowModal)
 
         # Сигнал для возврата в интерфейс
         self.signal = signal
@@ -39,6 +41,7 @@ class SettingPanel(QtWidgets.QWidget):
         self.setting.pushButton_12.clicked.connect(self.add_item)
         self.setting.pushButton_10.clicked.connect(self.apply_data)
         self.setting.pushButton_11.clicked.connect(self.del_row)
+        self.setting.pushButton_13.clicked.connect(self.set_faceid)
 
         # Подгружаем настройки если они уже имеются
         if os.path.exists(os.path.join("data", "config.json")):
@@ -72,13 +75,13 @@ class SettingPanel(QtWidgets.QWidget):
 
     # Загрузить изображение в качестве аватарки пользователя
     def load_image(self):
-        image_path = QtWidgets.QFileDialog.getOpenFileName(filter="*.png\n*.jpg")
+        image_path, _ = QtWidgets.QFileDialog.getOpenFileName(filter="*.png *.jpg")
 
-        if image_path[0]: # Если пользователь выбрал изображение
-            if os.path.getsize(image_path[0]) < 8192:
+        if image_path:  # Если пользователь выбрал изображение
+            if os.path.getsize(image_path) < 8192:
                 # В зависимости от формата изображения задаем имя
-                image_format = "png" if "png" in image_path[1] else "jpg"
-                shutil.copy(image_path[0], os.path.join("data", f"custom.{image_format}"))
+                image_format = "png" if "png" in image_path else "jpg"
+                shutil.copy(image_path, os.path.join("data", f"custom.{image_format}"))
 
                 # Обновляем Label который отвечает за изображение
                 image_pixmap = QtGui.QPixmap(os.path.join("data", f"custom.{image_format}"))
@@ -126,7 +129,7 @@ class SettingPanel(QtWidgets.QWidget):
 
         # Если строка не пустая и содержит 3 элемента
         if dataline and len(dataline.split(":")) == 3:
-            parsed = dataline.split(":") # [name, ip, port]
+            parsed = dataline.split(":")  # [name, ip, port]
 
             # Проверяем данные на валидность
             if not (self.check_ip(parsed[1]) and self.check_port(parsed[2])):
@@ -173,7 +176,7 @@ class SettingPanel(QtWidgets.QWidget):
 
     # Применить настройки из таблицы серверов
     def apply_data(self):
-        row_index = self.setting.tableWidget.currentRow() # Индекс строки
+        row_index = self.setting.tableWidget.currentRow()  # Индекс строки
 
         # Заменяем основные настройки на выбранные
         if row_index != -1:
@@ -185,7 +188,7 @@ class SettingPanel(QtWidgets.QWidget):
 
     # Удалить строку из таблицы
     def del_row(self):
-        row_index = self.setting.tableWidget.currentRow() # Индекс строки
+        row_index = self.setting.tableWidget.currentRow()  # Индекс строки
         if row_index != -1:
             self.setting.tableWidget.removeRow(row_index)
 
@@ -237,3 +240,10 @@ class SettingPanel(QtWidgets.QWidget):
         else:
             self.setting.lineEdit_4.setStyleSheet("border: 2px solid red; border-radius: 7px;")
             self.setting.lineEdit_4.setText("Слишком длинный либо слишком короткий ник")
+
+    def set_faceid(self):
+        import sys
+        from PyQt5.QtWidgets import QApplication
+
+        self.face_recognition_app = FaceRecognitionApp()
+        self.face_recognition_app.show()
