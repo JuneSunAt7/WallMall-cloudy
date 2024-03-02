@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QImage, QPixmap
 from methods.face_des import Ui_FormFace
+from methods.user_keys import Keys
 
 class FaceRecognitionApp(QWidget):
     def __init__(self):
@@ -65,7 +66,7 @@ class FaceRecognitionApp(QWidget):
 
                 # Сохранение изображения лица
                 self.save_face(face)
-                self.continue_clicked()
+                # self.continue_clicked()
 
 
         return frameOpencvDnn, faceBoxes
@@ -80,6 +81,8 @@ class FaceRecognitionApp(QWidget):
 
     def continue_clicked(self):
         print("Continue button clicked")
+        self.keys = Keys()
+        self.keys.show()
         self.hide()
     def save_face(self, face):
         if os.path.exists('str.jpg'):
