@@ -26,10 +26,6 @@ logger.add(
     compression="zip",
     enqueue=True # Делаем логгер потокобезопасным
 )
-# ============================================================================================================
-
-
-# Интерфейс программы и обработчик событий внутри него
 class Client(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -75,9 +71,6 @@ class Client(QtWidgets.QMainWindow):
         self.ui.pushButton_22.clicked.connect(lambda: self.smile_send('14'))
         self.ui.pushButton_24.clicked.connect(lambda: self.smile_send('15'))
 
-
-    # Перетаскивание безрамочного окна
-    # ==================================================================
     def center(self):
         qr = self.frameGeometry()
         cp = QtWidgets.QDesktopWidget().availableGeometry().center()
