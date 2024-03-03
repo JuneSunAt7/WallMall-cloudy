@@ -1,6 +1,6 @@
 import cv2
 import dlib
-import numpy as np
+import winreg
 import os
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import QTimer
@@ -77,18 +77,32 @@ class FaceRecognitionApp(QWidget):
 
     def save_and_back_clicked(self):
         print("Save and back button clicked")
+        key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\WallMall")  # открываем или создаем ключ
+        winreg.SetValueEx(key, "face", 0, winreg.REG_SZ, "1")  # записываем значение
+
+        winreg.CloseKey(key)  # закрываем ключ
         self.hide()
 
     def continue_clicked(self):
         print("Continue button clicked")
+
+        key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\WallMall")  # открываем или создаем ключ
+        winreg.SetValueEx(key, "face", 0, winreg.REG_SZ, "1")  # записываем значение
+
+        winreg.CloseKey(key)  # закрываем ключ
         self.keys = Keys()
         self.keys.show()
         self.hide()
+
     def save_face(self, face):
         if os.path.exists('str.jpg'):
             print('Файл существует')
         else:
             cv2.imwrite('str.jpg', face)
             print("saved")
+        key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\WallMall")  # открываем или создаем ключ
+        winreg.SetValueEx(key, "face", 0, winreg.REG_SZ, "1")  # записываем значение
+
+        winreg.CloseKey(key)  # закрываем ключ
 
 
