@@ -14,7 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_FormKeys(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(893, 499)
+        Form.resize(825, 468)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Ignored)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
+        Form.setMinimumSize(QtCore.QSize(825, 468))
+        Form.setMaximumSize(QtCore.QSize(825, 468))
         Form.setStyleSheet("border: 2px solid #434965;\n"
 "border-radius: 7px;\n"
 "background-color: #2A2F41;")
@@ -28,11 +35,13 @@ class Ui_FormKeys(object):
         self.radioButton = QtWidgets.QRadioButton(self.splitter)
         self.radioButton.setMinimumSize(QtCore.QSize(0, 40))
         self.radioButton.setMaximumSize(QtCore.QSize(16777215, 40))
-        self.radioButton.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radioButton.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 11pt \"MS Shell Dlg 2\";")
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(self.splitter)
         self.radioButton_2.setMinimumSize(QtCore.QSize(0, 40))
-        self.radioButton_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radioButton_2.setStyleSheet("color: rgb(255, 255, 255);\n"
+"font: 75 11pt \"MS Shell Dlg 2\";")
         self.radioButton_2.setObjectName("radioButton_2")
         self.verticalLayout.addWidget(self.splitter)
         self.frame = QtWidgets.QFrame(Form)
@@ -43,6 +52,40 @@ class Ui_FormKeys(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.frame)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setMinimumSize(QtCore.QSize(0, 40))
+        self.label.setStyleSheet("font: 75 11pt \"MS Shell Dlg 2\";\n"
+"border: 0px;")
+        self.label.setObjectName("label")
+        self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
+        self.lineEdit = QtWidgets.QLineEdit(self.frame)
+        self.lineEdit.setMinimumSize(QtCore.QSize(0, 40))
+        self.lineEdit.setStyleSheet("font: 75 11pt \"MS Shell Dlg 2\";\n"
+"border-radius:7px;\n"
+"background-color: #595F76;\n"
+"\n"
+"color: rgb(255, 255, 255);")
+        self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit.setObjectName("lineEdit")
+        self.gridLayout_2.addWidget(self.lineEdit, 0, 1, 1, 2)
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        self.label_2.setMinimumSize(QtCore.QSize(0, 40))
+        self.label_2.setStyleSheet("font: 75 11pt \"MS Shell Dlg 2\";\n"
+"border: 0px;")
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_2.addWidget(self.label_2, 1, 0, 1, 2)
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.frame)
+        self.lineEdit_2.setMinimumSize(QtCore.QSize(0, 40))
+        self.lineEdit_2.setStyleSheet("font: 75 11pt \"MS Shell Dlg 2\";\n"
+"border-radius:7px;\n"
+"background-color: #595F76;\n"
+"\n"
+"color: rgb(255, 255, 255);")
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.gridLayout_2.addWidget(self.lineEdit_2, 1, 2, 1, 1)
         self.verticalLayout.addWidget(self.frame)
         self.splitter_2 = QtWidgets.QSplitter(Form)
         self.splitter_2.setOrientation(QtCore.Qt.Horizontal)
@@ -54,6 +97,7 @@ class Ui_FormKeys(object):
 " color: white;\n"
 "border-radius: 7px;\n"
 "background-color: #595F76;\n"
+"    font: 75 11pt \"MS Shell Dlg 2\";\n"
 "}\n"
 "QPushButton:hover{\n"
 "background-color: #50566E;\n"
@@ -66,6 +110,7 @@ class Ui_FormKeys(object):
         self.pushButton_2.setStyleSheet("QPushButton{\n"
 " color: white;\n"
 "border-radius: 7px;\n"
+"    font: 75 11pt \"MS Shell Dlg 2\";\n"
 "background-color: #595F76;\n"
 "}\n"
 "QPushButton:hover{\n"
@@ -86,5 +131,7 @@ class Ui_FormKeys(object):
         Form.setWindowTitle(_translate("Form", "Ключи"))
         self.radioButton.setText(_translate("Form", "Пароль"))
         self.radioButton_2.setText(_translate("Form", "Внешний ЭК"))
+        self.label.setText(_translate("Form", "Пароль:"))
+        self.label_2.setText(_translate("Form", "Пароль ещё раз:"))
         self.pushButton.setText(_translate("Form", "Отменить"))
         self.pushButton_2.setText(_translate("Form", "Сохранить "))
