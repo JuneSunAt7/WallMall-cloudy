@@ -3,6 +3,7 @@ import hashlib
 import configparser
 import winreg
 from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5 import QtCore, QtGui, QtWidgets
 from methods.keyinterface import Ui_FormKeys
 
 class Keys(QWidget):
@@ -18,6 +19,8 @@ class Keys(QWidget):
         self.ui.pushButton_2.clicked.connect(self.save_params)
 
         self.ui.radioButton.setChecked(True)
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
     def set_passwd(self):
         if self.ui.radioButton.isChecked():
@@ -69,6 +72,7 @@ class Keys(QWidget):
             winreg.SetValueEx(key, "phykey", 0, winreg.REG_SZ, "1")  # записываем значение
 
             winreg.CloseKey(key)  # закрываем ключ
+        self.close()
 
 
 

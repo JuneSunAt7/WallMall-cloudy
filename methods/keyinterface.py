@@ -134,4 +134,4 @@ class Ui_FormKeys(object):
         self.label.setText(_translate("Form", "Пароль:"))
         self.label_2.setText(_translate("Form", "Пароль ещё раз:"))
         self.pushButton.setText(_translate("Form", "Отменить"))
-        self.pushButton_2.setText(_translate("Form", "Сохранить "))
+        self.pushButton_2.setText(_translate("Form", "Продолжить "))

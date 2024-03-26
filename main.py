@@ -350,8 +350,8 @@ if __name__ == "__main__":
     face_app.ui.pushButton.setVisible(False)
     face_app.ui.pushButton_3.setVisible(False)
     face_app.show()
-    app.exec_()
 
+    app.exec_()
     # После завершения распознавания лица вызываем основное окно
     myapp = Client()
     myapp.show()

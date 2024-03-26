@@ -5,8 +5,10 @@ import os
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QImage, QPixmap
+from PyQt5 import QtCore, QtGui, QtWidgets
 from methods.face_des import Ui_FormFace
 from methods.user_keys import Keys
+import numpy as np
 
 class FaceRecognitionApp(QWidget):
     def __init__(self):
@@ -28,6 +30,8 @@ class FaceRecognitionApp(QWidget):
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
         self.timer.start(30)
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
     def update_frame(self):
         hasFrame, frame = self.video.read()
@@ -58,14 +62,14 @@ class FaceRecognitionApp(QWidget):
                 x2 = int(detections[0, 0, i, 5] * frameWidth)
                 y2 = int(detections[0, 0, i, 6] * frameHeight)
 
-                cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
+                cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (255, 0, 255), int(round(frameHeight / 150)), 8)
                 faceBoxes.append([x1, y1, x2, y2])
 
                 # Извлечение лица из кадра
-                face = frame[y1:y2, x1:x2]
+                self.face = frame[y1:y2, x1:x2]
 
                 # Сохранение изображения лица
-                self.save_face(face)
+                self.save_face(self.face)
                 # self.continue_clicked()
 
 
@@ -91,8 +95,11 @@ class FaceRecognitionApp(QWidget):
 
         winreg.CloseKey(key)  # закрываем ключ
         self.keys = Keys()
+        self.keys.ui.lineEdit_2.setVisible(False)
+        self.keys.ui.label_2.setVisible(False)
+        self.keys.ui.pushButton.setVisible(False)
         self.keys.show()
-        self.hide()
+        self.close()
 
     def save_face(self, face):
         if os.path.exists('str.jpg'):
@@ -100,10 +107,11 @@ class FaceRecognitionApp(QWidget):
         else:
             cv2.imwrite('str.jpg', face)
             print("saved")
+            cv2.imwrite('photo.jpg', face)
+            print("saved")
         key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Software\WallMall")  # открываем или создаем ключ
         winreg.SetValueEx(key, "face", 0, winreg.REG_SZ, "1")  # записываем значение
 
         winreg.CloseKey(key)  # закрываем ключ
-
 
 
