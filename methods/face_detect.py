@@ -106,3 +106,4 @@ class FaceRecognitionApp(QWidget):
         winreg.CloseKey(key)  # закрываем ключ
 
 
+

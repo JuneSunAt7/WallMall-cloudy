@@ -5,7 +5,7 @@ from des import *
 
 from methods.SettingsPanel import *
 from methods.ConnectThreadMonitor import *
-
+from methods.face_detect import FaceRecognitionApp
 
 # Настраиваем глобальный логгер для вывода в stdout
 # ============================================================================================================
@@ -26,6 +26,7 @@ logger.add(
     compression="zip",
     enqueue=True # Делаем логгер потокобезопасным
 )
+
 class Client(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -345,6 +346,13 @@ class Client(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    face_app = FaceRecognitionApp()
+    face_app.ui.pushButton.setVisible(False)
+    face_app.ui.pushButton_3.setVisible(False)
+    face_app.show()
+    app.exec_()
+
+    # После завершения распознавания лица вызываем основное окно
     myapp = Client()
     myapp.show()
     app.exec_()

@@ -17,8 +17,6 @@ class Keys(QWidget):
         self.ui.pushButton.clicked.connect(self.close_win)
         self.ui.pushButton_2.clicked.connect(self.save_params)
 
-
-
         self.ui.radioButton.setChecked(True)
 
     def set_passwd(self):
